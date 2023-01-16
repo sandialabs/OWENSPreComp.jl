@@ -31,8 +31,8 @@
     - julia -e 'using Pkg; Pkg.add("Coverage");
       import PreComp; cd(joinpath(dirname(pathof(PreComp)), ".."));
       using Coverage; cl, tl = get_summary(process_folder());
-      println("(", cl/tl*100, "%) covered")'
-  coverage: `\(\d+.\d+\%\) covered`
+      println("(", cl/tl*100, ") covered")'
+  coverage: '/(\d+\.\d+) covered/'
 
 # Name a test and select an appropriate image.
 # images comes from Docker hub
