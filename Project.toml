@@ -1,0 +1,10 @@
+name = "OWENSPreComp"
+uuid = "7fd84261-8b17-47b6-a87d-1cc34e69440e"
+authors = ["Taylor McDonnell <taylor.golden.mcdonnell@gmail.com> and Kevin R. Moore <kevmoor@sandia.gov> and the original NREL PreComp Developers"]
+version = "1.0.0"
+
+[deps]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
