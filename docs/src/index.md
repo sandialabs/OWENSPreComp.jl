@@ -1,10 +1,6 @@
 # OWENSPreComp
 
-[![](https://img.shields.io/badge/docs-stable-blue.svg)](github.com/sandialabs.github.io/OWENSPreComp/)
-![](https://github.com/sandialabs/OWENSPreComp.jl/workflows/CI/badge.svg)
-
-
-Classical laminate theory for composite wings/blades based on: https://nwtc.nrel.gov/OWENSPreComp
+Classical laminate theory for composite wings/blades based on: https://nwtc.nrel.gov/PreComp
 
 Please make all feature changes and bug fixes as branches and then create pull requests against the dev branch.  The dev branch will be periodically pulled into master for version changes.
 
