@@ -1,6 +1,6 @@
 # OWENSPreComp
 
-[![](https://img.shields.io/badge/docs-stable-blue.svg)](github.com/sandialabs.github.io/OWENSPreComp/)
+[![](https://img.shields.io/badge/docs-stable-blue.svg)](https://sandialabs.github.io/OWENSPreComp.jl)
 ![](https://github.com/sandialabs/OWENSPreComp.jl/workflows/CI/badge.svg)
 
 
