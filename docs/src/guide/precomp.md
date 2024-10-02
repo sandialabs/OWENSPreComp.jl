@@ -28,10 +28,11 @@ This guide provides step-by-step instructions on how to prepare input files (spe
 
 
 
-|**Revision** |**Date** |**Description** |
-| - | - | - |
-|1\.00 |30-Sep-2005 |First publication. Supports PreComp v1.00.00 |
-|1\.10 |04-Aug-2006 |Modified PreComp for more accurate analysis of properties. Included Note on shear center computation in the manual.  Supports PreComp v1.00.01 |
+| **Revision** | **Date**      | **Description**                                                                                          |
+|--------------|---------------|----------------------------------------------------------------------------------------------------------|
+| 1.00        | 30-Sep-2005   | First publication. Supports PreComp v1.00.00                                                            |
+| 1.10        | 04-Aug-2006   | Modified PreComp for more accurate analysis of properties. Included note on shear center computation in the manual. Supports PreComp v1.00.01 |
+
 
 ## Introduction
 
@@ -40,14 +41,13 @@ PreComp (**Pre**-processor for computing **Comp**osite blade structural properti
 **Table 1  Blade Structural Properties Required for Aeroelastic Modeling** 
 
 
-
-|**Properties Category** |**Section Properties** |
-| - | - |
-|Direct stiffnesses |Flap, lag (edgewise), axial, and torsion stiffnesses |
-|Cross-coupled stiffnesses |Flap-twist, lag-twist, flap-lag, axial-twist, axial-flap, and axial-lag stiffnesses |
-|Principal axes |Orientation of principal axes for inertia and for stiffness |
-|Inertias |Mass, mass moments of inertia about the principal axes |
-|Offsets |Shear-center, center-of-mass, and tension-center offsets |
+| **Properties Category**     | **Section Properties**                                                                                     |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------|
+| Direct stiffnesses          | Flap, lag (edgewise), axial, and torsion stiffnesses                                                      |
+| Cross-coupled stiffnesses   | Flap-twist, lag-twist, flap-lag, axial-twist, axial-flap, and axial-lag stiffnesses                     |
+| Principal axes              | Orientation of principal axes for inertia and for stiffness                                               |
+| Inertias                    | Mass, mass moments of inertia about the principal axes                                                    |
+| Offsets                     | Shear-center, center-of-mass, and tension-center offsets                                                  |
 
 Finite-element techniques, despite their capability for accurate stress and displacement analysis, cannot yield these properties directly.  One must rely on computationally complex post- processing of force-displacement data.  Blade Properties Extractor, BPE [4], represents one such post-processing tool.  Researchers have tried to use 3-D laminate theories to obtain structural properties directly.  These theories, however, overestimate torsion stiffness by as much as 50−80 times because warping effects are difficult to model and affect the torsion stiffness significantly.  This is especially true for asymmetrical sections that are typified by turbine blades.  Computation of torsion stiffness and cross-stiffness properties can be tricky even with 3-D finite element models (FEMs).  We developed a modified 2-D model and combined it with a shear flow approach, akin to Bredt-Batho’s approach for metallic blades, which implicitly accounts for the dominant warping effects.  PreComp uses this approach to compute the torsion stiffness, cross- stiffness properties, and other structural properties. Structural properties listed in the table include geometric offsets such as that of the section center of mass from the shear center.  Unlike the cross-stiffness properties, which cause elastic couplings, these offsets cause dynamic coupling of the blade bending, torsion, and axial motions. 
 
@@ -152,14 +152,13 @@ This file can have any name.  An example main input file, called precomp.pci, is
 **Table 1.  General Parameters** 
 
 
-
-|**Parameter** |**Description** |**Unit** |
-| - | - | - |
-|*Bl\_length* |Blade length, the distance between the blade-to-hub root attachment and the blade tip.  It is not the rotor radius. |m |
-|*N\_sections* |Number of blade sections at which PreComp computes structural properties.  You may select any number of sections and place them arbitrarily over the blade length (see Figure 6).*** |- |
-|*N\_materials* |Number of materials whose properties would be read from the materials table, *materials.inp*.  It should be less than or equal to the maximum number of materials listed in the table.  In the former case, only the first *N\_materials* properties are read. |- |
-|*Out\_format* |<p>Integer switch identifying type of the output file. </p><p>1: Output file showing all properties computed by PreComp is generated.  These properties refer to axes systems shown in Figure 13 (described in Section [7]). </p><p>2: Output file showing select properties required by BModes code is generated.  These properties and associated reference axes are described in Reference [9]). </p><p>3: Both output files are generated. </p>|- |
-|*TabDelim* |A logical switch.  If set to *t* or *true*, the output properties, printed as a table, are tab-delimited.  Such a table, when exported to a spreadsheet such as Excel, automatically converts to columns.  If this switch is set to *f* or *false*, the output properties, printed as a table, are space-delimited.  Such a table (see Figure 12) helps easy reading of output properties.  In the sample input file, this switch is set to *false*. |- |
+| **Parameter**    | **Description**                                                                                                                                                                                                                                         | **Unit** |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| *Bl_length*      | Blade length, the distance between the blade-to-hub root attachment and the blade tip. It is not the rotor radius.                                                                                                                                   | m        |
+| *N_sections*     | Number of blade sections at which PreComp computes structural properties. You may select any number of sections and place them arbitrarily over the blade length (see Figure 6).                                                                         | -        |
+| *N_materials*    | Number of materials whose properties would be read from the materials table, *materials.inp*. It should be less than or equal to the maximum number of materials listed in the table. In the former case, only the first *N_materials* properties are read. | -        |
+| *Out_format*     | Integer switch identifying type of the output file. 1: Output file showing all properties computed by PreComp is generated. These properties refer to axes systems shown in Figure 13 (described in Section [7]). 2: Output file showing select properties required by BModes code is generated. These properties and associated reference axes are described in Reference [9]. 3: Both output files are generated. | -        |
+| *TabDelim*       | A logical switch. If set to *t* or *true*, the output properties, printed as a table, are tab-delimited. Such a table, when exported to a spreadsheet such as Excel, automatically converts to columns. If this switch is set to *f* or *false*, the output properties, printed as a table, are space-delimited. Such a table (see Figure 12) helps easy reading of output properties. In the sample input file, this switch is set to *false*. | -        |
 
 The next input block is for blade-sections-specific data.  The data is entered in six columns and *N\_sections* rows, where *N\_sections* is the number of blade sections defined above.  [Table 2] describes the section parameters, which show as headers of the six columns. 
 
@@ -168,28 +167,26 @@ The last data block provides webs-related information.  Any number of webs may b
 **Table 2.  Blade-Section Parameters** 
 
 
-
-|**Parameter** |**Description** |**Unit** |
-| - | - | - |
-|*Span\_loc* |This is a subscripted array.  *Sloc(i)* is the *i*th-section span location measured from the blade root and normalized with respect to the blade length.  The first section is always located at *0.0* and the last at *1.0*.  At least two sections must be specified. |- |
-|*Le\_loc* |This is a subscripted array.  At *i*th-section, *le\_loc(i)* is the distance of the leading edge from the blade reference axis, measured along and normalized with respect to the chord length at that section.  The reference axis is usually selected to coincide with the blade pitch axis. |- |
-|*Chord* |*Chord(i)* is the chord length in meters at the *i*th section. |m |
-|*Tw\_aero* |*Tw\_aero(i)* is the blade twist in degrees at the *i*th section.  It indicates the orientation of the chord of the local section with respect to the hub plane (Figure 13).  A positive twist moves the section leading edge into the wind. |deg |
-|*Af\_shape\_file* |For each blade station specified in this input file, you must supply an auxiliary input file that describes the airfoil shape (section external shape) at that station.  Any name up to 99 characters may be specified for such a file and must be enclosed within quotation marks (see the sample main input file).  *Af\_shape\_file(i)* represents the name of the auxiliary airfoil shape input file for the *i*th section.  The same airfoil shape input file name may be supplied for different sections.  For example, as seen in main input file, Figure 3, the same airfoil shape file name, *af1-6.inp*, is supplied for sections 1 to 6.  This implies that these sections have the same external shape.  We will explain the airfoil shape input file in Section [4.2]. |- |
-|*Int\_str\_file* |For each blade station, you must also name an auxiliary input file that describes the internal structural layup at that station.  Any name up to 99 characters may be specified for such a file and must be enclosed within quotation marks.  *Int\_str\_file (i)* represents the name of the internal structural layup input file for the *i*th section.  The same internal structural input file name may be supplied for different sections.  For example, as seen in Figure 3, the same airfoil shape file name, *int01.inp*, is supplied for all sections.  This implies that these sections have the same internal structural layup of composite laminas.  We will explain the internal structural layup input file in Section [4.3]. |- |
+| **Parameter**        | **Description**                                                                                                                                                                                                                                                                                                                                                     | **Unit** |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| *Span_loc*           | This is a subscripted array. *Sloc(i)* is the *i*th-section span location measured from the blade root and normalized with respect to the blade length. The first section is always located at *0.0* and the last at *1.0*. At least two sections must be specified.                                                                                                 | -        |
+| *Le_loc*             | This is a subscripted array. At *i*th-section, *le_loc(i)* is the distance of the leading edge from the blade reference axis, measured along and normalized with respect to the chord length at that section. The reference axis is usually selected to coincide with the blade pitch axis.                                                                                | -        |
+| *Chord*              | *Chord(i)* is the chord length in meters at the *i*th section.                                                                                                                                                                                                                                                                                                      | m        |
+| *Tw_aero*            | *Tw_aero(i)* is the blade twist in degrees at the *i*th section. It indicates the orientation of the chord of the local section with respect to the hub plane (Figure 13). A positive twist moves the section leading edge into the wind.                                                                                                                       | deg      |
+| *Af_shape_file*      | For each blade station specified in this input file, you must supply an auxiliary input file that describes the airfoil shape (section external shape) at that station. Any name up to 99 characters may be specified for such a file and must be enclosed within quotation marks (see the sample main input file). *Af_shape_file(i)* represents the name of the auxiliary airfoil shape input file for the *i*th section. The same airfoil shape input file name may be supplied for different sections. For example, as seen in the main input file, Figure 3, the same airfoil shape file name, *af1-6.inp*, is supplied for sections 1 to 6. This implies that these sections have the same external shape. We will explain the airfoil shape input file in Section [4.2]. | -        |
+| *Int_str_file*       | For each blade station, you must also name an auxiliary input file that describes the internal structural layup at that station. Any name up to 99 characters may be specified for such a file and must be enclosed within quotation marks. *Int_str_file(i)* represents the name of the internal structural layup input file for the *i*th section. The same internal structural input file name may be supplied for different sections. For example, as seen in Figure 3, the same airfoil shape file name, *int01.inp*, is supplied for all sections. This implies that these sections have the same internal structural layup of composite laminas. We will explain the internal structural layup input file in Section [4.3]. | -        |
 
 **Table 3.  Parameters for the Webs** 
 
 
-
-|**Parameter** |**Description** |**Unit** |
-| - | - | - |
-|*Nweb* |Total number of webs.  Each web is assumed to be straight between its inboard and outboard ends. |- |
-|*Ib\_sp\_stn* |Blade station at which the inboard end of webs is located.  This implies that all webs must originate at the same inboard location.  If webs originate at different locations, *Ib\_sp\_stn* should be the location of the innermost end of webs. |- |
-|*Ob\_sp\_stn* |Blade station at which the outboard end of webs is located.  This implies that all webs must end at the same outboard location.  If webs end at different locations, *Ob\_sp\_stn* should be the location of the outermost end of webs. |- |
-|*Web\_num* |Web number. ||
-|*Inb\_end\_ch\_loc* |This subscripted variable with *inb\_end\_ch\_loc(i)* defines the chordwise location of the *i*th web at the inboard blade station, *ib\_sp\_stn*, specified earlier.  This chordwise location is measured from the leading edge and is normalized with respect to the chord length. |- |
-|*Oub\_end\_ch\_loc* |This subscripted variable with *oub\_end\_ch\_loc(i)* defines the chordwise location of the *i*th web at the outboard blade station, *ob\_sp\_stn*, specified earlier.  This chordwise location is measured from the leading edge and is normalized with respect to the chord length. |- |
+| **Parameter**           | **Description**                                                                                                                                                                                                                       | **Unit** |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| *Nweb*                  | Total number of webs. Each web is assumed to be straight between its inboard and outboard ends.                                                                                                                                     | -        |
+| *Ib_sp_stn*             | Blade station at which the inboard end of webs is located. This implies that all webs must originate at the same inboard location. If webs originate at different locations, *Ib_sp_stn* should be the location of the innermost end of webs. | -        |
+| *Ob_sp_stn*             | Blade station at which the outboard end of webs is located. This implies that all webs must end at the same outboard location. If webs end at different locations, *Ob_sp_stn* should be the location of the outermost end of webs. | -        |
+| *Web_num*               | Web number.                                                                                                                                                                                                                           | -        |
+| *Inb_end_ch_loc*        | This subscripted variable with *inb_end_ch_loc(i)* defines the chordwise location of the *i*th web at the inboard blade station, *ib_sp_stn*, specified earlier. This chordwise location is measured from the leading edge and is normalized with respect to the chord length. | -        |
+| *Oub_end_ch_loc*        | This subscripted variable with *oub_end_ch_loc(i)* defines the chordwise location of the *i*th web at the outboard blade station, *ob_sp_stn*, specified earlier. This chordwise location is measured from the leading edge and is normalized with respect to the chord length. | -        |
 
 ### Airfoil Data File
 
@@ -207,11 +204,11 @@ The input, *N\_af\_nodes*, is specified in the first field of the first line in 
 
 
 
-|**Parameter** |**Description** |**Unit** |
-| - | - | - |
-|*N\_af\_nodes* |Number of nodes that describe the airfoil shape (see Figure 7).  The node numbering begins at the leading edge, moves over the top surface, reaches the trailing edge, moves over the lower surface, and finally arrives at the last node, just below the leading edge. |- |
-|*Xnode* |<p>Subscripted variable with *xnode(i)* defining the x-coordinate of the *i*th node with respect to *(x\_af, y\_af)* airfoil reference axes.  These reference axes originate at the leading edge with *x\_af* directed along the section chord, and the normal, *y\_af* axis, pointing toward the upper-surface side (Figure </p><p>7).  This coordinate is normalized with respect to chord length.  The maximum permissible value for an x-coordinate is 1.  Two nodes with the same maximum x-coordinate, but different y-coordinates specify a blunt edge. </p>|- |
-|*Ynode* |Subscripted variable with *ynode(i)* defining the y-coordinate of the *i*th node.  This coordinate, like *xnode(i)*, is also normalized with respect to chord length. |- |
+| **Parameter**   | **Description**                                                                                                                                                                                                                                           | **Unit** |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| *N_af_nodes*     | Number of nodes that describe the airfoil shape (see Figure 7). The node numbering begins at the leading edge, moves over the top surface, reaches the trailing edge, moves over the lower surface, and finally arrives at the last node, just below the leading edge. | -        |
+| *Xnode*          | Subscripted variable with *xnode(i)* defining the x-coordinate of the *i*th node with respect to *(x_af, y_af)* airfoil reference axes. These reference axes originate at the leading edge with *x_af* directed along the section chord, and the normal, *y_af* axis, pointing toward the upper-surface side (Figure 7). This coordinate is normalized with respect to chord length. The maximum permissible value for an x-coordinate is 1. Two nodes with the same maximum x-coordinate, but different y-coordinates specify a blunt edge. | -        |
+| *Ynode*          | Subscripted variable with *ynode(i)* defining the y-coordinate of the *i*th node. This coordinate, like *xnode(i)*, is also normalized with respect to chord length.                                                                                     | -        |
 
 ### Internal Structure Data File
 
@@ -228,27 +225,23 @@ We repeat the data entry procedure for the lower surface and finally for each we
 **Table 5.  Parameters for the Internal Structure Input File.** 
 
 
+| **Parameter**        | **Description**                                                                                                                                                                                                                                                                                                                                                     | **Unit** |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| *N_scts*             | Subscripted integer variable. *N_scts(1)* and *N_scts(2)* are the number of sectors on the upper and lower surfaces, respectively.                                                                                                                                                                                                                                  | -        |
+| *Xsec_node*          | Real array input that identifies locations of sectors on the upper and lower surfaces. The array contains a sequence of values that specify x-coordinates of the sector boundaries. The x-coordinate is normalized with respect to the chord length and is referenced to the airfoil coordinate frame (Figure 7). In our sample file, we have three sectors on the upper surface, which imply four points that define sector boundaries. The x-coordinates of these four points are 0, 0.15, 0.50, and 1.0. Sector 1 is bounded by x-coordinates *0* and *0.15*, sector 2 is bounded by x-coordinates *0.15* and *0.5*, and sector 3 is bounded between x-coordinates *0.50* and *1.0*. Note: The x-coordinates of sector boundaries must be positive and in ascending order. The first coordinate may be greater than 0 and the last less than 1. In this case, however, PreComp checks to determine whether there is a gap (no laminate) at the leading and trailing edges of the section and, if necessary, issues a warning to place webs at those locations. | -        |
+| *Sect_num*           | Sector number.                                                                                                                                                                                                                                                                                                                                                       | -        |
+| *N_laminas*          | Number of laminas for a particular sector identified in the file (must be a positive integer).                                                                                                                                                                                                                                                                      | -        |
+| *Lam_num*            | The lamina number. The first lamina is always at the exterior surface and the numbering proceeds from the exterior surface to the interior of the blade.                                                                                                                                                                                                              | -        |
+| *N_plies*            | Number of plies in an identified lamina (must be a positive integer).                                                                                                                                                                                                                                                                                               | -        |
+| *Tply*               | The thickness of each ply in an identified lamina.                                                                                                                                                                                                                                                                                                                  | m        |
+| *Tht_lam*            | Ply angle representing orientation of the principal material (fiber) direction of each ply of a lamina. Figure 1 shows how a positive ply angle is defined. S is a point on the blade surface at which we wish to determine the ply angle. The *r-t-s* is a right-hand coordinate system with *r* axis parallel to the blade axis and pointing outboard. The *t* axis is normal to *r* and tangent to the blade surface. The *n* axis is normal to the blade surface at point S. Line SL is the principal (longitudinal) material direction and α, the angle between SL and *r* axis, represents the ply angle. A rotation α of the *r-t-s* axes system about the *n* axis thus aligns the *r* axis with principal material direction SL. A positive rotation about the *n* axis implies a positive ply angle. | deg      |
+| *Mat_id*             | Material identifier for each ply in a lamina. PreComp uses this identifier to read ply properties from a materials table.                                                                                                                                                                                                                                           | -        |
+| *N_weblams*          | Number of laminas in an identified web (must be a positive integer). Note that unlike the blade surfaces, which may have multiple laminates (sectors or stacks of laminas), a web is assumed to have only a single laminate. Most blade webs are built this way.                                                                                                   | -        |
+| *W_tply*             | The thickness of each ply in an identified web. If this section lies within the blade sections *ib_sp_loc* and *ob_sp_loc* specified earlier, but does not have the identified web, set *W_tply* value to zero.                                                                                                                                                      | m        |
+| *Tht_Wlam*           | The ply angle representing orientation of principal material direction of each ply in an identified web. The definition of ply angle for a web lamina follows that of *Tht_lam* defined earlier. In this case, however, the *n* axis, normal to the web surface, always points to the leading edge.                                                                 | deg      |
+| *Wmat_Id*            | Material identifier for each ply in a web. PreComp uses this identifier to read ply properties from a materials table, discussed in Section [4.4].                                                                                                                                                                                                                   | -        |
 
-|**Parameter** |**Description** |**Unit** |
-| - | - | - |
-|*N\_scts* |Subscripted integer variable.  *N\_scts(1)* and *N\_scts(2)* are the number of sectors on the upper and lower surfaces, respectively. |- |
-|*Xsec\_node* |Real array input that identifies locations of sectors on the upper and lower surfaces.  The array contains a sequence of values that specify x-coordinates of the sector boundaries.  The x-coordinate is normalized with respect to the chord length and is referenced to the airfoil coordinate frame (Figure 7).  In our sample file, we have three sectors on the upper surface, which imply four points that define sector boundaries.  The x-coordinates of these four points are 0, 0.15, 0.50, and 1.0.  Sector 1 is bounded by x-coordinates *0* and *0.15*, sector 2 is bounded by x-coordinates *0.15* and *0.5*, and sector 3 is bounded between x-coordinates *0.50* and *1.0*.  Note:  The x-coordinates of sector boundaries must be positive and in ascending order.  The first coordinate may be greater than 0 and the last less than 1.  In this case, however, PreComp checks to determine whether there is a gap (no laminate) at the leading and trailing edges of the section and, if necessary, issues a warning to place webs at those locations. |- |
-|*Sect\_num* |Sector number. |- |
-|*N\_laminas* |Number of laminas for a particular sector identified in the file (must be a positive integer). |- |
-|*Lam\_num* |The lamina number.  The first lamina is always at the exterior surface and the numbering proceeds from the exterior surface to the interior of the blade. |- |
-|*N\_plies* |Number of plies in an identified lamina (must be a positive integer). |- |
-|*Tply* |The thickness of each ply in an identified lamina. |m |
-|*Tht\_lam* |Ply angle representing orientation of the principal material (fiber) direction of each ply of a lamina.  Figure 1 shows how a positive ply angle is defined.  S is a point on the blade surface at which we wish to determine the ply |deg |
 
-
-
-||angle.  The *r-t-s* is a right-hand coordinate system with *r* axis parallel to the blade axis and pointing outboard.  The *t* axis is normal to *r* and tangent to the blade surface.  The *n* axis is normal to the blade surface at point S.  Line SL is the principal (longitudinal) material direction and α, the angle between SL and *r* axis, represents the ply angle.  A rotation α of the *r-t-s* axes system about the *n* axis thus aligns the *r* axis with principal material direction SL.  A positive rotation about the *n* axis implies a positive ply angle. ||
-| :- | :- | :- |
-|*Mat\_id* |Material identifier for each ply in a lamina.  PreComp uses this identifier to read ply properties from a materials table. |- |
-|*N\_weblams* |Number of laminas in an identified web (must be a positive integer).  Note that unlike the blade surfaces, which may have multiple laminates (sectors or stacks of laminas), a web is assumed to have only a single laminate.  Most blade webs are built this way. |- |
-|*W\_tply* |The thickness of each ply in an identified web.  If this section lies within the blade sections *ib\_sp\_loc* and *ob\_sp\_loc* specified earlier, but does not have the identified web, set *w\_tply* value to zero. |m |
-|*Tht\_Wlam* |The ply angle representing orientation of principal material direction of each ply in an identified web.  The definition of ply angle for a web lamina follows that of *Tht\_lam*** defined earlier.  In this case, however, the *n* axis, normal to the web surface, always points to the leading edge. |deg |
-|*Wmat\_Id* |Material identifier for each ply in a web.  PreComp uses this identifier to read ply properties from a materials table, discussed in Section [4.4]. |- |
 
 ### Materials Data File
 
@@ -263,16 +256,16 @@ Note: [Table 6] defines ν*12*, which is one of the Poisson’s ratios.  The oth
 **Table 6.  Parameters for the Material File** 
 
 
+| **Parameter**      | **Description**                                                                                                                                                                                                 | **Unit** |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| *Mat_Id*            | Material identifier; an integer.                                                                                                                                                                              | -        |
+| *E1*                | Young’s modulus in the principal direction and assumed to be the same in tension and compression (in Pascal, ie.).                                                                                           | N/m²     |
+| *E2*                | Young’s modulus in the lateral direction (normal to the principal direction) and is assumed to be the same in tension and compression (in Pascal).                                                            | Pa       |
+| *G12*               | The shear modulus with respect to the principal and lateral directions (in Pascal).                                                                                                                           | Pa       |
+| *Nu12*              | Poisson’s ratio, ν*12*, defined as the contraction strain in direction 2 (lateral direction) caused by unit extensional strain in direction 1 (principal direction).                                         | -        |
+| *Density*           | This is the material density in kg/m³.                                                                                                                                                                       | kg/m³    |
+| ***Mat_Name***      | This is the material name associated with the material identifier. However, it is not read or required by PreComp.                                                                                           | -        |
 
-|**Parameter** |**Description** |**Unit** |
-| - | - | - |
-|*Mat\_Id* |Material identifier; an integer. |- |
-|*E1* |Young’s modulus in the principal direction and assumed to be the same in tension and compression (in Pascal, ie.). |N/m2|
-|*E2* |Young’s modulus in the lateral direction (normal to the principal direction) and is assumed to be the same in tension and compression (in Pascal). |Pa |
-|*G12* |The shear modulus with respect to the principal and lateral directions (in Pascal). |Pa |
-|*Nu12* |Poisson’s ratio, ν*12*, defined as the contraction strain in direction 2 (lateral direction) caused by unit extensional strain in direction 1 (principal direction).   |- |
-|*Density* |This is the material density in. |Kg/m3|
-|***Mat\_Name*** |This is the material name associated with the material identifier.  However, it is not read or required by PreComp. |- |
 
 ## Error Messages and Warnings
 
@@ -324,31 +317,31 @@ Before we describe the output properties, we need to understand the axes systems
 **Table 7.  Ouput Parameters** 
 
 
-
-|***Span\_loc*** |Span location of the section measured from the blade root and normalized with respect to the blade length. |- |
-| - | :- | - |
-|***Chord*** |Chord length of the section. |m |
-|***Tw\_aero*** |Section aerodynamic twist, θ*aero*|deg |
-|***EI\_flap*** |Section flap bending stiffness about the *YE* axis.  |Nm2|
-|***EI\_lag*** |Section lag (edgewise) bending stiffness about the *XE* axis. |-Nm2|
-|***GJ*** |Section torsion stiffness. |Nm2|
-|***EA*** |Section axial stiffness. |N |
-|***S\_f*** |Coupled flap-lag stiffness with respect to the *XE-YE* frame. |Nm2|
-|***S\_airfoil*** |Coupled axial-flap stiffness with respect to the *XE-YE* frame. |Nm |
-|***S\_al*** |Coupled axial-lag stiffness with respect to the *XE-YE* frame. |Nm. |
-|***S\_ft*** |Coupled flap-torsion stiffness with respect to the *XE-YE* frame. |Nm2|
-|***S\_lt*** |Coupled lag-torsion stiffness with respect to the *XE-YE* frame. |Nm2|
-|***S\_at*** |Coupled axial-torsion stiffness. |Nm |
-|***X\_sc*** |X-coordinate of the shear-center offset with respect to the *XR-YR* axes. |m |
-|***Y\_sc*** |Chordwise offset of the section shear-center with respect to the reference frame, *XR-YR*. |m |
-|***X\_tc*** |X-coordinate of the tension-center offset with respect to the *XR-YR* axes. |m |
-|***Y\_tc*** |Chordwise offset of the section tension-center with respect to the *XR-YR* axes. |m |
-|***Mass*** |Section mass per unit length. |Kg/m |
-|***Flap\_iner*** |Section flap inertia about the *YG* axis per unit length. |Kg-m |
-|***Lag\_iner*** |Section lag inertia about the *XG* axis per unit length. |Kg-m |
-|***Tw\_iner*** |Orientation of the section principal inertia axes with respect the blade reference plane, θ*I*  |deg |
-|***X\_cm*** |X-coordinate of the center-of-mass offset with respect to the *XR-YR* axes. |m |
-|***Y\_cm*** |Chordwise offset of the section center of mass with respect to the *XR-YR* axes. |m |
+| **Parameter**        | **Description**                                                                                                                            | **Unit** |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| ***Span_loc***       | Span location of the section measured from the blade root and normalized with respect to the blade length.                                | -        |
+| ***Chord***          | Chord length of the section.                                                                                                              | m        |
+| ***Tw_aero***        | Section aerodynamic twist, θ*aero*.                                                                                                       | deg      |
+| ***EI_flap***        | Section flap bending stiffness about the *YE* axis.                                                                                       | Nm²      |
+| ***EI_lag***         | Section lag (edgewise) bending stiffness about the *XE* axis.                                                                             | Nm²      |
+| ***GJ***             | Section torsion stiffness.                                                                                                                 | Nm²      |
+| ***EA***             | Section axial stiffness.                                                                                                                    | N        |
+| ***S_f***            | Coupled flap-lag stiffness with respect to the *XE-YE* frame.                                                                             | Nm²      |
+| ***S_airfoil***      | Coupled axial-flap stiffness with respect to the *XE-YE* frame.                                                                          | Nm       |
+| ***S_al***           | Coupled axial-lag stiffness with respect to the *XE-YE* frame.                                                                           | Nm       |
+| ***S_ft***           | Coupled flap-torsion stiffness with respect to the *XE-YE* frame.                                                                        | Nm²      |
+| ***S_lt***           | Coupled lag-torsion stiffness with respect to the *XE-YE* frame.                                                                         | Nm²      |
+| ***S_at***           | Coupled axial-torsion stiffness.                                                                                                          | Nm       |
+| ***X_sc***           | X-coordinate of the shear-center offset with respect to the *XR-YR* axes.                                                                | m        |
+| ***Y_sc***           | Chordwise offset of the section shear-center with respect to the reference frame, *XR-YR*.                                               | m        |
+| ***X_tc***           | X-coordinate of the tension-center offset with respect to the *XR-YR* axes.                                                               | m        |
+| ***Y_tc***           | Chordwise offset of the section tension-center with respect to the *XR-YR* axes.                                                         | m        |
+| ***Mass***           | Section mass per unit length.                                                                                                              | kg/m     |
+| ***Flap_iner***      | Section flap inertia about the *YG* axis per unit length.                                                                                 | kg·m     |
+| ***Lag_iner***       | Section lag inertia about the *XG* axis per unit length.                                                                                  | kg·m     |
+| ***Tw_iner***        | Orientation of the section principal inertia axes with respect to the blade reference plane, θ*I*.                                        | deg      |
+| ***X_cm***           | X-coordinate of the center-of-mass offset with respect to the *XR-YR* axes.                                                              | m        |
+| ***Y_cm***           | Chordwise offset of the section center of mass with respect to the *XR-YR* axes.                                                         | m        |
 
 **Future Plans**
 
