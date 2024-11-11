@@ -2,6 +2,7 @@
 
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://sandialabs.github.io/OWENSPreComp.jl)
 ![](https://github.com/sandialabs/OWENSPreComp.jl/workflows/CI/badge.svg)
+[![codecov.io](https://codecov.io/github/sandialabs/OWENSPreComp.jl/coverage.svg?branch=master)](https://codecov.io/github/sandialabs/OWENSPreComp.jl?branch=master)
 
 
 Classical laminate theory for composite wings/blades based on: https://nwtc.nrel.gov/PreComp
