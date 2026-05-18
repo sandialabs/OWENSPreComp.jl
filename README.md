@@ -1,4 +1,4 @@
-# OWENSPreComp
+# OWENSPreComp.jl
 
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://sandialabs.github.io/OWENSPreComp.jl)
 ![](https://github.com/sandialabs/OWENSPreComp.jl/workflows/CI/badge.svg)
@@ -12,4 +12,4 @@ Please make all feature changes and bug fixes as branches and then create pull r
 This code has been translated to the Julia programming language and modified to handle automatic differentiation by Taylor McDonnell at Brigham Young University during his PhD work.
 
 ## Installation
-] add OWENSPrecomp
+] add OWENSPreComp
