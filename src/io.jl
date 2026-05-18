@@ -232,7 +232,7 @@ function TEtoTEdata(x, y)
     yl = y[le_loc:end]
 
     # check if coordinates were input in other direction
-    if y[1] < y[0]
+    if y[2] < y[1]
         temp = yu
         yu = yl
         yl = temp
