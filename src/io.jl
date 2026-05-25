@@ -5,6 +5,9 @@ Reads a main OWENSPreComp input file.
 Returns sloc,le_loc,chord,tw_aero,af_shape_file,int_str_file,
 ib_sp_stn,ob_sp_stn,ib_ch_loc,ob_ch_loc
 """
+_parse_float(token) = parse(Float64, token)
+_parse_int(token) = parse(Int, token)
+
 function readmain(fname::String)
     local sloc,le_loc,chord,tw_aero,af_shape_file,int_str_file,ib_sp_stn,
     ob_sp_stn,ib_ch_loc,ob_ch_loc
@@ -14,10 +17,10 @@ function readmain(fname::String)
         title = chomp(readline(f))
         readline(f)
         readline(f)
-        bl_length = Meta.parse(split(chomp(readline(f)))[1])
-        naf = Meta.parse(split(chomp(readline(f)))[1])
-        n_materials = Meta.parse(split(chomp(readline(f)))[1])
-        out_format = Meta.parse(split(chomp(readline(f)))[1])
+        bl_length = _parse_float(split(chomp(readline(f)))[1])
+        naf = _parse_int(split(chomp(readline(f)))[1])
+        n_materials = _parse_int(split(chomp(readline(f)))[1])
+        out_format = _parse_int(split(chomp(readline(f)))[1])
         TabDelim = lowercase(split(chomp(readline(f)))[1]) == "t"
         readline(f)
         readline(f)
@@ -35,10 +38,10 @@ function readmain(fname::String)
         int_str_file = Array{String,1}(undef, naf)
         for i = 1:naf
             substr = split(chomp(readline(f)))
-            sloc[i] = Meta.parse(substr[1])
-            le_loc[i] = Meta.parse(substr[2])
-            chord[i] = Meta.parse(substr[3])
-            tw_aero[i] = Meta.parse(substr[4])
+            sloc[i] = _parse_float(substr[1])
+            le_loc[i] = _parse_float(substr[2])
+            chord[i] = _parse_float(substr[3])
+            tw_aero[i] = _parse_float(substr[4])
             af_shape_file[i] = replace(substr[5],"'"=>"")
             int_str_file[i] = replace(substr[6],"'"=>"")
         end
@@ -46,20 +49,20 @@ function readmain(fname::String)
         readline(f)
         readline(f)
 
-        nweb = Meta.parse(split(chomp(readline(f)))[1])
+        nweb = _parse_int(split(chomp(readline(f)))[1])
         ib_ch_loc = Array{Float64,1}(undef, nweb)
         ob_ch_loc = Array{Float64,1}(undef, nweb)
         if nweb >= 1
-            ib_sp_stn = Meta.parse(split(chomp(readline(f)))[1])
-            ob_sp_stn = Meta.parse(split(chomp(readline(f)))[1])
+            ib_sp_stn = _parse_int(split(chomp(readline(f)))[1])
+            ob_sp_stn = _parse_int(split(chomp(readline(f)))[1])
 
             readline(f)
             readline(f)
 
             for iw = 1:nweb
                 substr = split(chomp(readline(f)))
-                ib_ch_loc[iw] = Meta.parse(substr[2])
-                ob_ch_loc[iw] = Meta.parse(substr[3])
+                ib_ch_loc[iw] = _parse_float(substr[2])
+                ob_ch_loc[iw] = _parse_float(substr[3])
             end
         end
         # Dimensionalize station locations
@@ -84,13 +87,13 @@ function readcompositesection(fname::String,locW::Array{Float64,1})
         readline(f)
 
         # number of sectors
-        n_sector = Int64(Meta.parse(split(chomp(readline(f)))[1]))
+        n_sector = _parse_int(split(chomp(readline(f)))[1])
 
         readline(f)
         readline(f)
 
         # read normalized chord locations
-        locU = [Float64(Meta.parse(x)) for x in split(chomp(readline(f)))]
+        locU = [_parse_float(x) for x in split(chomp(readline(f)))]
 
         n_laminaU, n_pliesU, tU, thetaU, mat_idxU = readsectorsfromfile(f, n_sector)
 
@@ -99,12 +102,12 @@ function readcompositesection(fname::String,locW::Array{Float64,1})
         readline(f)
 
         # number of sectors
-        n_sector = Int64(Meta.parse(split(chomp(readline(f)))[1]))
+        n_sector = _parse_int(split(chomp(readline(f)))[1])
 
         readline(f)
         readline(f)
 
-        locL = [Float64(Meta.parse(x)) for x in split(chomp(readline(f)))]
+        locL = [_parse_float(x) for x in split(chomp(readline(f)))]
 
         n_laminaL, n_pliesL, tL, thetaL, mat_idxL = readsectorsfromfile(f, n_sector)
 
@@ -143,7 +146,7 @@ function readsectorsfromfile(f::IOStream, n_sector::Int64)
         # if line == ""
         #   return []
         # end
-        push!(n_lamina, Int64(Meta.parse(split(line)[2])))
+        push!(n_lamina, _parse_int(split(line)[2]))
 
         readline(f)
         readline(f)
@@ -157,10 +160,10 @@ function readsectorsfromfile(f::IOStream, n_sector::Int64)
 
         for j = 1:n_lamina[i]
             array = split(chomp(readline(f)))
-            n_plies_S[j] = Int64(Meta.parse(array[2]))
-            t_S[j] = Float64(Meta.parse(array[3]))
-            theta_S[j] = Float64(Meta.parse(array[4]))
-            mat_idx_S[j] = Int64(Meta.parse(array[5]))
+            n_plies_S[j] = _parse_int(array[2])
+            t_S[j] = _parse_float(array[3])
+            theta_S[j] = _parse_float(array[4])
+            mat_idx_S[j] = _parse_int(array[5])
         end
 
         append!(n_plies,n_plies_S)
@@ -203,8 +206,8 @@ function readprofile(filename::String, numHeaderlines::Int64, LEtoLE::Bool)
                 break  # break if empty line
             end
             data = split(line)
-            push!(x, Float64(Meta.parse(data[1])))
-            push!(y, Float64(Meta.parse(data[2])))
+            push!(x, _parse_float(data[1]))
+            push!(y, _parse_float(data[2]))
         end
     end
 
@@ -229,7 +232,7 @@ function TEtoTEdata(x, y)
     yl = y[le_loc:end]
 
     # check if coordinates were input in other direction
-    if y[1] < y[0]
+    if y[2] < y[1]
         temp = yu
         yu = yl
         yl = temp
@@ -295,12 +298,12 @@ function readmaterials(fname::String = "materials.inp")
         name = String[]
         while !eof(f)
             array = split(chomp(readline(f)))
-            push!(mat_id,Meta.parse(array[1]))
-            push!(e1,Meta.parse(array[2]))
-            push!(e2,Meta.parse(array[3]))
-            push!(g12,Meta.parse(array[4]))
-            push!(nu12,Meta.parse(array[5]))
-            push!(rho,Meta.parse(array[6]))
+            push!(mat_id, _parse_int(array[1]))
+            push!(e1, _parse_float(array[2]))
+            push!(e2, _parse_float(array[3]))
+            push!(g12, _parse_float(array[4]))
+            push!(nu12, _parse_float(array[5]))
+            push!(rho, _parse_float(array[6]))
             if length(array) >= 7
                 cname = array[7]
                 for i = 8:length(array)
