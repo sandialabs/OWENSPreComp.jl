@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="300" viewBox="0 0 980 300" role="img" aria-labelledby="title desc">
+  <title id="title">OWENSPreComp workflow</title>
+  <desc id="desc">Diagram showing airfoil geometry, material data, and laminate schedules producing composite blade section stiffness, inertia, and offset properties.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#304050"/>
+    </marker>
+    <style>
+      .input{fill:#f8fafc;stroke:#304050;stroke-width:2;rx:7}
+      .kernel{fill:#eef7f2;stroke:#21735d;stroke-width:2;rx:7}
+      .output{fill:#fff5e5;stroke:#996400;stroke-width:2;rx:7}
+      .text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17212f}
+      .small{font-size:14px;fill:#485465}
+      .arrow{stroke:#304050;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="980" height="300" fill="#ffffff"/>
+  <rect class="input" x="34" y="38" width="185" height="84"/>
+  <text class="text" x="58" y="72">Airfoil shape</text>
+  <text class="small" x="58" y="100">upper/lower nodes</text>
+  <rect class="input" x="34" y="180" width="185" height="84"/>
+  <text class="text" x="58" y="214">Layup data</text>
+  <text class="small" x="58" y="242">materials, sectors, webs</text>
+  <path class="arrow" d="M219 80 C280 80 300 126 348 142"/>
+  <path class="arrow" d="M219 222 C280 222 300 174 348 158"/>
+  <rect class="kernel" x="348" y="82" width="244" height="128"/>
+  <text class="text" x="388" y="124">PreComp kernel</text>
+  <text class="small" x="388" y="154">laminate stiffness</text>
+  <text class="small" x="388" y="178">shear-flow section solve</text>
+  <path class="arrow" d="M592 146 H680"/>
+  <rect class="output" x="680" y="46" width="250" height="200"/>
+  <text class="text" x="718" y="84">Section properties</text>
+  <text class="small" x="718" y="116">EA, EI, GJ, coupled stiffness</text>
+  <text class="small" x="718" y="144">mass and inertias</text>
+  <text class="small" x="718" y="172">shear, tension, mass centers</text>
+  <text class="small" x="718" y="200">principal-axis orientation</text>
+</svg>
